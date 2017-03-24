@@ -1,0 +1,87 @@
+%% The openany option is here just to remove the blank pages before a new chapter
+\documentclass{book}
+\usepackage{graphicx}
+\usepackage{tcolorbox}
+\usepackage{textgreek,url,fancyvrb}
+\usepackage{soul}
+\usepackage[caption=false]{subfig}
+\usepackage[top=1in, bottom=1in, left=1 in, right= 1 in]{geometry}
+\usepackage{float}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{csquotes}
+\usepackage{url}
+\usepackage{todonotes}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+\hypersetup{linkcolor=blue, linkbordercolor=0 0 1, colorlinks=true}
+
+\makeatletter
+ \def\@textbottom{\vskip \z@ \@plus 1pt}
+ \let\@texttop\relax
+\makeatother
+
+
+\setitemize{noitemsep,topsep=1pt,parsep=1pt,partopsep=0pt}
+\lstset{
+language=C,
+numberstyle=\footnotesize,
+basicstyle=\ttfamily\footnotesize,
+stepnumber=1,
+breaklines=true,
+showspaces=false,           % Leerzeichen anzeigen ?
+showtabs=false,             % Tabs anzeigen ?
+frame=L
+ }
+
+\newcommand{\specialcell}[2][l]{%
+	\begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+
+
+\begin{document}
+
+\title{{ ~\\~\\~\\~\\~\\ Data Structures in C \\\Large ~\\Lecture Notes for  CIS*2520 \\~\\University of Guelph\\~\\~\\~\\~\\}}
+\author{Judi McCuaig }
+\maketitle
+
+\Huge 
+Foreward
+\\ \\ \\
+\normalsize
+This document was originally written as supplement to the slides and lectures for CIS*2520.  Recently(early 2017) it has been revised to serve as the main reference document for a distance education version of CIS*2520.   Students using this material are assumed to have  a background in programming in C.   
+
+Special thanks to David McCaughan, Pascal Matsakis and Xining Li for sharing  slides and presentations from their offerings CIS*2520.  D. McCaughan's materials influenced the overall design of the course materials significantly.   Dr. Matsakis and and Dr. Li's work helped greatly to  improve the material on computational complexity,  heaps, and priority queues.
+
+
+This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.
+
+
+\tableofcontents
+
+
+\mainmatter
+
+
+
+
+%
+\input{intro}
+\input{linearstructures}
+\input{hashtables}
+\input{introtrees}
+\input{binarytrees}
+\input{heaps}
+\input{priorityqueue}
+%
+%\input{advancedtrees}
+\input{complexity}
+%\input{sorting}
+%\appendix
+
+%\input{questionsolutions}
+%\end{appendix}
+
+\end{document}

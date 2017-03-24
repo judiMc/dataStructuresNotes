@@ -1,0 +1,53 @@
+
+%to be inserted into data structures textbook in the heaps chapter, after the heap's main functionality
+
+\chapter{Priority Queue}
+
+A priority queue differs from a normal queue because the elements do not follow a FIFO order. Instead elements are removed by the queue in order of priority, with the highest priority elements leaving first. If many items enter a priority queue at the same time the highest priority will be served first followed by the next lowest priority etc. The process gets more interesting when new items are being added sequentially. 
+
+\section{Uses}
+A priority queue is useful in any situation where scheduling must occur and the items being scheduled are not handled on a first come first served basis.   For example,  A priority queue would be ideal in an IT department where a lot of people are having a variety of issues. Some issues require immediate attention whereas some others can be put off for a short period of time.  If an entire network was to collapse and join the end of IT ticket queue, behind a long list of lost or forgotten user passwords you'd want the network issue to be fixed first since it effects a lot more people. After the network issue is fixed the less urgent issues will be fixed in the same order as before.
+
+Priority queues are useful in scheduling jobs for execution on computing systems.   Most operating systems use some kind of priority mechanism to ensure that crucial tasks are scheduled without crippling the less urgent tasks.  
+
+
+\section{Implementation}
+
+A priority queue can be implemented using any ADT that can be constructed so that the largest (or smallest) value is easily retrieved.  
+It is possible to implement a priority queue with a linear ADT, but it would not be very efficient because the entire list would need to be searched to find the highest priority every time the next item was to be removed. 
+
+The more effective approach for implementation of a priority queue is to use the Heap ADT.  The user experience would be the same as a queue, but the priority queue would run faster and would be able to handle larger sets of data to prioritize. 
+
+\section{Operations}
+The operations of a priority queue are identical to the operations of a normal queue.
+\begin{itemize}
+\item create()
+\item destroy()
+\item isEmpty()
+\item insert(comparable priority)
+\item removeMax()
+\end{itemize}
+
+These operations simply wrap the operations for the underlying data structure.  For example, if the priority queue were wrapping a linked list,  then the insert() function might use the addSorted() function of the linked list.   If the priority queue were implemented to wrap the Heap ADT,  the insert() function of the priority queue would wrap the insert() function of the heap.
+
+
+\section{Varying Priority and Starvation Prevention}
+We use the term \textbf{starvation} to describe the situation where an element in a priority queue never makes it to the top of the queue and is stuck in the queue forever.  
+
+If a large number of high priority items are continuously entering a priority queue that contains lower priority items, the lower priority items will become starved (never getting served/ removed from the queue). This is because the higher priority items will always be served first.  In this situation there must be an algorithm in place to prevent the starvation of lower priority items.  Many algorithms are possible.  The effectiveness of the algorithm depends on the nature of the elements stored in the priority queue and on the context of the application.
+
+One possible solution to starvation is to increase the priority of elements in the queue as their wait time increases.  High priority items are still processed quickly and low priority items will wait but only until the low-item's  priority increases to a value high to put it at the front of the queue. This makes sure all elements in the queue will eventually be processed, even if the ones that start  with a very low priority.
+
+Another possible algorithm is to process some specified number of high priority items followed by processing some specified number of  low priority items. If the value of "low priority" is not selected carefully, this approach could result in elements with a middle priority value being starved.
+
+A priority queue ADT should have some mechanism to prevent starvation of the elements in the queue.
+
+\section{Extending Activities}
+\begin{itemize}
+\item Consider the implementation of a priority queue using an array, a linked list,  and a heap.   For each implementation,  provide the pseudocode for the insert and removeMax operation.  What is the complexity of those operations in each case?
+
+\end{itemize}
+
+
+
+
