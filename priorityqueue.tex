@@ -3,10 +3,10 @@
 
 \chapter{Priority Queue}
 
-A priority queue differs from a normal queue because the elements do not follow a FIFO order. Instead elements are removed by the queue in order of priority, with the highest priority elements leaving first. If many items enter a priority queue at the same time the highest priority will be served first followed by the next lowest priority etc. The process gets more interesting when new items are being added sequentially. 
+A priority queue differs from a normal queue because the elements do not follow a FIFO order. Instead elements are removed by the queue in order of priority, with the highest priority elements leaving first. If many items enter a priority queue at the same time the highest priority will be served first followed by the next highest priority etc. The process gets more interesting when new items are being added during processing because the addition of a high priority item postpones the processing of lower priority items that were  already in the queue.
 
 \section{Uses}
-A priority queue is useful in any situation where scheduling must occur and the items being scheduled are not handled on a first come first served basis.   For example,  A priority queue would be ideal in an IT department where a lot of people are having a variety of issues. Some issues require immediate attention whereas some others can be put off for a short period of time.  If an entire network was to collapse and join the end of IT ticket queue, behind a long list of lost or forgotten user passwords you'd want the network issue to be fixed first since it effects a lot more people. After the network issue is fixed the less urgent issues will be fixed in the same order as before.
+A priority queue is useful in any situation where scheduling must occur and the items being scheduled are not handled on a first come first served basis.   For example,  A priority queue would be ideal in an IT department where a lot of people are having a variety of issues. Some issues require immediate attention whereas some others can be put off for a short period of time.  If an entire network was to collapse and join the end of IT ticket queue, behind a long list of lost or forgotten user passwords you'd want the network issue to be fixed first since it effects far more people. After the network issue is fixed the less urgent issues will be fixed in the same order as before.
 
 Priority queues are useful in scheduling jobs for execution on computing systems.   Most operating systems use some kind of priority mechanism to ensure that crucial tasks are scheduled without crippling the less urgent tasks.  
 
@@ -40,11 +40,12 @@ One possible solution to starvation is to increase the priority of elements in t
 
 Another possible algorithm is to process some specified number of high priority items followed by processing some specified number of  low priority items. If the value of "low priority" is not selected carefully, this approach could result in elements with a middle priority value being starved.
 
-A priority queue ADT should have some mechanism to prevent starvation of the elements in the queue.
+A priority queue ADT should have some mechanism to prevent starvation of the elements in the queue.  Priority queues are used in scheduling jobs in operating systems that support threads or multiple processors.   Operating systems have a variety of approaches to avoid the starvation of low priority jobs in the event queue.  
 
 \section{Extending Activities}
 \begin{itemize}
 \item Consider the implementation of a priority queue using an array, a linked list,  and a heap.   For each implementation,  provide the pseudocode for the insert and removeMax operation.  What is the complexity of those operations in each case?
+\item Use the internet to find an additional approach to avoiding starvation in a priority queue, other than the two mentioned in the notes.  
 
 \end{itemize}
 

@@ -46,11 +46,11 @@ review).
 
 Binary tree operations can be divided into two sets. The first set are
 sometimes called wrapper operations  These are the operations that the
-user of the ADT will call.  Wrapper functions typically take the Tree Struct as a parameter, possibly along with other paramters.
+user of the ADT will call.  Wrapper functions typically take the Tree Struct as a parameter, possibly along with other parameters.
 
 The second set of operations are the helper
 operations. These are the operations that actually do the work of
-setting up, manipulating, and keeping track of the tree.  The helper operations typically take the root node of the tree as a parameter ( the \textbf{root} member variable of the Tree struct) along with other paramters.  Often helper operations for trees are recursive.
+setting up, manipulating, and keeping track of the tree.  The helper operations typically take the root node of the tree as a parameter ( the \textbf{root} member variable of the Tree struct) along with other parameters.  Often helper operations for trees are recursive.
 Below you can find a list of some common wrapper and helper operations on binary trees.
 
 \begin{lstlisting}
@@ -65,11 +65,11 @@ findInTree(void * data):void *
 
 //Helper Operations
 
-TreeNode * insert(TreeNode * root, TreeDataType data);
-TreeNode * delete(TreeNode * root, TreeDataType data);
+TreeNode * insert(TreeNode * root, void * data);
+TreeNode * delete(TreeNode * root, void * data);
 bool isEmpty(TreeNode * root);
 bool hasTwoChildren(TreeNode * root);
-int compare (TreeDataType data1, TreeDataType data2);
+int compare (void * data1, void * data2);
 TreeNode * findMinimum(TreeNode * root);
 void printInOrder(TreeNode * root);
 \end{lstlisting}
@@ -80,7 +80,7 @@ elegant way to provide node-processing functionality is to provide
 traversal operations that accept a function pointer. The function is
 executed once for every node in the tree.
 
-Lets start our exploration of binary trees by looking at the helper
+Let's start our exploration of binary trees by looking at the helper
 functions starting with insertion. We'll ignore the data types and
 function pointers for now, but will return to them towards the end of
 this chapter.
@@ -104,7 +104,7 @@ Insertion into a tree has three possible cases:
 Cases 2 and 3 result in a recursive call to the insertion operation.
 
 \begin{lstlisting}
-insert(TreeNode * root, TreeDataType data, funcPointer to compare operation): TreeNode *
+insert(TreeNode * root, void * data, funcPointer to compare operation): TreeNode *
 
 if (the root node is empty)
 {
@@ -247,10 +247,10 @@ this:
 \includegraphics[width=6.00000in]{pictures/bintree8.png}
 
 \begin{lstlisting}
-TreeNode * delete(TreeNode * root, TreeDataType data, compareFP,destroyNodeFP):TreeNode
+TreeNode * delete(TreeNode * root, void * data, compareFP,destroyNodeFP):TreeNode
 
 TreeNode * temp;
-TreeDataType removedData;
+void * removedData;
 
 if the root is empty
 	we have a problem and should clean up and exit gracefully

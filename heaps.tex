@@ -20,12 +20,12 @@ A heap is considered to be a partially ordered data structure because the elemen
 A heap should provide the functionality to insert, delete, and retrieve the min/max value.    Additionally the heap must provide the standard data structure operations of create, destroy and isEmpty.   A robust heap library should allow the library user to choose between min or max heap capabilities when the heap is created.  The minimum set of operations is shown below.  
 
 \begin{itemize}
-\item insert
-\item delete
-\item findMinorMax
-\item isEmpty
-\item create
-\item destroy
+\item insertHeapNode
+\item deleteMinorMax
+\item getMinorMax
+\item createHeap
+\item destroyHeap
+\item heapify
 \end{itemize}
 
 The Heap ADT requires the same abstraction with void * pointers,   operations to create nodes,  and function pointers to compare, delete and print data as the previous ADTs we have studied.     The create, destroy, and isEmpty functions are very similar to the same functions for other ADTs and are not explained in detail here.
@@ -36,7 +36,7 @@ The insert and delete functions for a heap are the most complicated operations.
 
 A heap is a specialized version of a complete tree.  This means that all insertions must occur at the left-most side of the bottom level of the tree in order to maintain the property of completeness.   The algorithm for adding an element to a heap follows:
 \begin{lstlisting}
-insert(Heap * heap, void * data)
+insertHeapNode(Heap * heap, void * data)
 {
     create a node from the data
     locate the next position in the heap (the left most position with no node)
@@ -48,7 +48,7 @@ insert(Heap * heap, void * data)
 The process of reheapification consists of swapping elements until the heap property is satisfied or until the root of the heap is reached.  The pseudocode for reheapification is shown below.
 
 \begin{lstlisting}
-reheapify(Heap * heap, Node * newNode)
+heapify(Heap * heap, Node * newNode)  //this is a heapify-down function
 {
      parentNode = get parent node of newNode
      while(newNode->data is greater than parentNode->data  //or less than for a min heap
@@ -65,7 +65,7 @@ reheapify(Heap * heap, Node * newNode)
  To remove the root node,  you find the left-most leaf of the heap,  replace the root node with that node, and then reheapify downwards until the heap property is satisfied.
  
  \begin{lstlisting}
- void * findAndDeleteRoot(Heap * heap)
+ void * deleteMinOrMax(Heap * heap)
  {
  	tempNode = heap->rootNode
  	heap->rootNode = the node in the "last" position in the tree //the leftmost, bottom node
@@ -79,7 +79,7 @@ reheapify(Heap * heap, Node * newNode)
  }
  \end{lstlisting}
  
- The delete process for the root node can be used to delete any node in the heap.   The node to be deleted is the root node of a subtree,  and the delete algorithm can be applied to the subtree instead of the entire heap.
+ The delete process for the root node can be used to delete any node in the heap.   The node to be deleted is the root node of a subtree,  and the delete algorithm can be applied to the subtree instead of the entire heap.  The process simply requires an additional function to find the target node first.
  
 \section{Array Implementation of a Heap}
 
@@ -95,7 +95,7 @@ The array is organized so index 0 is height 0, height 1 is indexes 1-2, height 2
 
 \subsection{Adding Elements}
 
-Adding an element to a heap has a worst case complexity of O(height) or O(log(N)), since there is a maximum of 1 swap per level of the heap.
+Adding an element to a heap has a worst case complexity of O(height) or O(log(N)), since there is a maximum of 1 swap per level of the heap.  (note: for an explanation of why the height of a heap is log(N) see the complexity section in the References)
 The algorithm for inserting elements does not change when an array is used for implementation.  Only the implementation details change.   Consider the following example where 10, 23, 3, 32, 17 and 5 are added to a max heap.
 
 We begin by adding 10 to an empty heap.

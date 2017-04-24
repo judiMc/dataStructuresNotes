@@ -273,12 +273,12 @@ subsubsection
 \chapter{Hash Tables} \label{hash}
 \section{Introduction}
  
- Definition:  A Hash Table is an array (aka Table) that uses a hash function to map keys to a specific location in the array.   The position of the entry in the table is determined by the value of the key.  
+A Hash Table is an array (aka Table) that uses a hash function to map keys to a specific location in the array.   The position of the entry in the table is determined by the value of the key.  
  
- A hash table (also knowns as a Hash Map)  is a more flexible version of an associative array that does not require that the key of the the key-data pair be something that easily maps to a position in a table.   Instead the hash table calculates the table position by algorithmically manipulating (hashing) the key to determine the correct position in the table.   A hash table is useful in situations where the data key-value pairs might not have key values that are nicely distributed to allow them to be mapped to table positions between 0 and the end of the table.
+ A hash table (also knowns as a Hash Map)  is a more flexible version of an associative array that does not require that the key of the the key-data pair be something that easily maps to a position in a table.   Instead, the hash table calculates the table position by algorithmically manipulating (hashing) the key to determine the correct position in the table.   A hash table is useful in situations where the data key-value pairs might not have key values that are nicely distributed to allow them to be mapped to table positions between 0 and the end of the table.
  
  
-The \textbf{Hash Function} a function that, when given a key as a parameter returns a  an integer within a  fixed range.   The hash function ALWAYS returns the same value for a given input, but may return the same value for more than one input.   For example,  a hash function could take in the province and plate number from a car licence plate (something like ONBWCC123) and manipulate the digits and letters to produce an integer that maps to a position on the table.  If the hash table were of size 357, the integer would be between 0 and 356.  
+The \textbf{Hash Function} a function that, when given a key as a parameter returns  an integer within a  fixed range.   The hash function ALWAYS returns the same value for a given input, but may return the same value for more than one input.   For example,  a hash function could take in the province and plate number from a car licence plate (something like ONBWCC123) and manipulate the digits and letters to produce an integer that maps to a position on the table.  If the hash table were of size 357, the integer would be between 0 and 356.  
 
 \begin{figure}[H]
 \centering
@@ -317,11 +317,16 @@ This is exactly the same operations list is for an associative array.   The algo
 
 \section{Hash Table Characteristics}
 
+Hash tables are relatively simple to implement and provide operations that are ideal for tasks that involve frequent look ups of the elements.  Hash tables have several characteristics that  distinguish them from other data structures.
+
+
 \begin{itemize}
 \item Hash tables can provide an improvement over the search time for binary trees ( binary tree search time is O(log 2 n).     The cost of search in a hash table is the time to execute the hash function + any time to resolve collisions which is usually O(1).
 \item Hash tables are efficient for large sets of data, but sometimes the hash function is computationally expensive which makes other data structures more effective for small sets of data.
 \item The most often used operations on a hash table are the operations for finding and inserting.   These operations are dependent on the hash function.   The selection of hash function is key to the efficient operation of the hash table.
-\item The set of keys for the data is called the key space.   The key space is often larger than the size of the table in memory (the address space), which \item The hash function maps the key space into the address space.   More specifically the hash function takes a key and uses it to produce an address that is in the defined address space of the allocated table.   The same address must be produced every time given the same key.
+\item The set of keys for the data is called the key space.   The key space is often larger than the size of the table in memory (the address space), which means that often two elements must hash to the same location.  When this happens the collision resolution strategy is used to ensure that both elements are stored and can be retrieved.
+
+\item The hash function maps the key space into the address space.   More specifically the hash function takes a key and uses it to produce an address that is in the defined address space of the allocated table.   The same address must be produced every time given the same key.
 \item Because the key space is typically larger than the address space, more than one key will be mapped to the same address.   This is called a collision and must be handled through collision resolution. The selection of collision resolution method is an important part of hash table design.
 \end{itemize}
 
@@ -396,7 +401,7 @@ The division method can result in very good distribution of address locations de
 
 \section{Collision Resolution for Hashing}
 
-When two keys hash to the same table position we say that a \textbf{collision} has occured.  Even if the keys for the data are unique, it is likely that sometimes the hash function will calculate the same table position for two keys.   When  this happens, the hash table must find a different location to store the second set of data, since two pieces of data cannot be stored in the same memory location.   The process of locating the alternate storage location is called \textbf{collision resolution}.
+When two keys hash to the same table position we say that a \textbf{collision} has occurred.  Even if the keys for the data are unique, it is likely that sometimes the hash function will calculate the same table position for two keys.   When  this happens, the hash table must find a different location to store the second set of data, since two pieces of data cannot be stored in the same memory location.   The process of locating the alternate storage location is called \textbf{collision resolution}.
    
 Two common approaches to collision resolution are \textbf{open addressing} and \textbf{separate chaining}.  Open addressing solutions use an algorithm to search in a repeatable fashion for an alternate location.   Separate chaining solutions create additional table space by using a linked data structure.
 

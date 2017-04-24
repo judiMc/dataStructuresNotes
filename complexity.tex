@@ -9,14 +9,6 @@ quickly, you will require an algorithm with fast execution time.   The estimate 
 
 
 
-The efficiency of an algorithm can be measured by estimating how long the algorithm will take to complete for some set of data, and by
-estimating how much memory the algorithm will require to perform that
-execution. The context of your computing environment tells you which
-measure is most important- if you have limited memory you will require
-an algorithm that uses minimal memory. If you need an answer very
-quickly, you will require an algorithm with fast execution time.\\
-
-
 \subsection{Determining Complexity}
 
 We often need to know the complexity of a particular algorithm.     We could attempt to experimentally determine the running time of an algorithm,  or we could analyse the algorithm theoretically.   
@@ -24,7 +16,7 @@ We often need to know the complexity of a particular algorithm.     We could att
 
 \subsubsection{Experimental Analysis}
 
-In order to experimentally analyse an algorithm, we first must implement the algorithm.  This seems like an obvious step, but if we're trying to choose between three competing algorithms,  the experimental analysis means that all three algorithms must be implemented.    Sometimes that is trivial,  sometimes it is now.
+In order to experimentally analyse an algorithm, we first must implement the algorithm.  This seems like an obvious step, but if we're trying to choose between three competing algorithms,  the experimental analysis means that all three algorithms must be implemented.    Sometimes that is trivial,  sometimes it is not.
 
 After the algorithm is implemented,  we must \textbf{instrument} the algorithm to enable us to measure the running time.   Usually that means using  some kind of timer or clock.       Below is a sample testing function that uses two fictional functions,  Sort() and Time().  Sort() is the function being analysed.  Time() is the function used to capture the time in seconds since midnight.   
 
@@ -41,7 +33,7 @@ float testSort( List * the List)
 }
 \end{lstlisting}
 
-The testSort function would be run with a variety of lists using different sizes and compositions of data.   The results would be analysed statistically to determine what the best, worst, and average running time of the algorithm is, and what data characteristics affect those times.
+The testSort function would be run with a variety of lists using different sizes and compositions of data.   The results would be analysed statistically to determine  the best, worst, and average running time of the algorithm, and what data characteristics affect those times.
 
 While this process sounds straightforward,  there are several  possible issues that can make consistent analysis difficult.  For example:
 
@@ -99,14 +91,16 @@ This algorithm only runs through the entire list if the largest value in the lis
 
 Lets suppose that there was one specific primitive operation that took longer than the others, and one that was faster.   Without doing an analysis to determine exactly the speed of each primitive operation,  we can say that the fastest execution speed would occur if all the primitive operations were the fastest operation.   We can also say that the slowest execution speed for this algorithm would occur if all the primitive operations were the slowest operation.    So the execution speed of the function, is bounded by the fastest/slowest speeds of the primitive operations.
 
-For the purposes of estimating complexity of algorithms, we assume that primitive operations take \textbf{constant time} and don't worry too much about exactly how much time that is.    Using that knowledge we can say that the algorithm above takes 6(n) constant time units -1 constant time unit.    This means that the execution time of the algorithm depends on the length of the  list (n).   We say that such an algorithm is \textbf{Order N} or \textbf{O(N)}.
+For the purposes of estimating complexity of algorithms, we assume that primitive operations take \textbf{constant time} and don't worry too much about exactly how much time that is.    Using that knowledge we can say that the algorithm above takes   6n -1 constant time units based on the worst case analysis.   
+
+    This means that the execution time of the algorithm depends on the length of the  list (n).   We say that such an algorithm is \textbf{Order N} or \textbf{O(N)}.
 
 \subsection{Big O notation}
 
  Time
 complexity is often expressed in Big O notation.
 The big O is read as
-on the order of,which means that the most significant factor in the
+\textbf{on the order of},which means that the most significant factor in the
 time complexity analysis is shown.   The \textbf{N}  represents the data input into the algorithm.  
 
 So if we say that an algorithm is
@@ -146,7 +140,7 @@ Big-O lets you compare the complexity of algorithms that do similar
 operations. It provides a way to estimate the number of operations
 required to complete an algorithm. We assume that the operation that
 is executed the most is the one that should be counted, and that we can
-ignore other operations because the time added wont significantly impact
+ignore other operations because the time added won't significantly impact
 the overall time. We also ignore anything that takes a constant amount
 of time.
 
@@ -321,7 +315,7 @@ for(int i=1; i<n; i++)
 int n=100; int w=0;& These two assignments happen once each so they are O(1)\\ \hline
 for (int i=1; i\textless n; i++) & This loop will execute n times so the loop is O(N)\\\hline
 for (int k=1; k\textless n+n; k++) & This loop will execute 2n times.  That is still considered to be O(N)\\\hline
-{  w=w+1;} & \specialcell[]{Assigment happens once for each inner loop iteration. (N outer loops X 2N inner loops) \\The assignment occurs N*2N times, which is O(N\textsuperscript{2})}\\\hline\hline
+{  w=w+1;} & \specialcell[]{Assignment happens once for each inner loop iteration. (N outer loops X 2N inner loops) \\The assignment occurs N*2N times, which is O(N\textsuperscript{2})}\\\hline\hline
 \end{tabular}
 
 \end{table}
@@ -593,8 +587,21 @@ The following story is often used to illustrate the power of exponential growth.
 
 A peasant once did a great favour for a rich king.  The king asked how he could repay the peasant.   The peasant asked the king to place two pieces of grain on the first square of a chess board, and to double the amount of grain on each following square. The king, knowing that the chess board only has 64 squares, readily agrees.   However, the king does not understand exponents.
 
+\begin{table}[H]
+\caption{The King's payment for each square on the board}
 
-\includegraphics{pictures/wisePeasant.png}
+\begin{tabular}{l|l}
+Square(N)&Pieces of Grain\\\hline\hline
+1&2\\
+2&4\\
+3&8\\
+4&16\\
+5&32\\
+...&...\\
+63 & 9 223 000 000 000 000 000\\
+64 & 18 450 000 000 000 000 000\\
+\end{tabular}
+\end{table}
 
 So just how much trouble will the king have repaying his debt?   Imagine that the king can grow 1 billion pieces of grain ever second.   It will take 585 years to grow enough grain for the 64th square on the chess board.   It would take over one thousand years to cover the entire chessboard using the peasant's algorithm.
 
@@ -605,7 +612,7 @@ O(N), O(log N) and O(N\textsuperscript{k})  where k is some constant number are 
 
 Even a reasonable algorithm can be unusable if it is O(N\textsuperscript{k}) and k is a large number.
 
-Unreasonable algorithms have exponential complexity.   Examples of exponential complexity are O(2\textsuperscript{n}), O(N!) and O(N\textsuperscript{N}.
+Unreasonable algorithms have exponential complexity.   Examples of exponential complexity are O(2\textsuperscript{n}), O(N!) and O(N\textsuperscript{N}).
 
 \section {Additional Resources for Computational Complexity}
 
