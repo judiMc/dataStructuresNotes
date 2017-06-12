@@ -55,8 +55,36 @@ You must submit modular code for your homework solutions.  This means you must b
 \item Use makefiles to automate the build process so that you can divide your code into as many modules as necessary.    
 \item Each file in your project should contain a single module that goes together in some way (i.e. a module for reading in files,  a module for calculating things,  a module for list operations).
 \item Your programs must be organized in a file structure that contains src/  bin/ include/  assets/  and docs/  folders and your makefile must make use of that file structure.   src/ is for source code,  include/ is for .h files,   docs/ is for doxygen documentation,  and assets is for testing files, data files, etc.   The README goes in the root folder of an assignment, not in the sub folders.
-\item The README file should be based on the template shown at the end of this chapter.  Read assignment specifications carefully as there may be additional information  expected in assignment-specific README files.
+\item The README file should be based on the template shown below.  Read assignment specifications carefully as there may be additional information  expected in assignment-specific README files.
 \end{itemize}
+
+\clearpage
+\textbf{Sample README format}
+\begin{verbatim}
+****************************************************
+Your name		        Your student number
+The class name		The assignment name/number
+The date                          Your uoguelph email address
+****************************************************
+
+************
+Compilation
+************
+in this space write down how to compile your program
+include descriptions of all the targets in your makefile
+
+***********************
+Running the program(s)
+***********************
+in this space describe how to run your program
+please don't run programs out of your makefile
+include a description of any command line arguments
+
+*****************
+Known Limitations
+*****************
+in this space write down any of the limitations (unfinished bits) that your program has
+\end{verbatim}
 
 \section{Test driven development }
 
